@@ -1,7 +1,7 @@
 from remoteGui import *
 
 
-class Television (QMainWindow, Ui_TvRemote):
+class Television(QMainWindow, Ui_TvRemote):
     MIN_VOLUME: int = 0
     MAX_VOLUME: int = 2
     MIN_CHANNEL: int = 0
@@ -33,16 +33,12 @@ class Television (QMainWindow, Ui_TvRemote):
 
         if not self.__status:
             self.__status = True
-            self.channelNumber.setVisible(True)
-            self.volumeNumber.setVisible(True)
             self.muteLabel.setVisible(self.__mute)
-            self.channelNumber.setText(f'{self.__channel}')
-            self.volumeNumber.setText(f'{self.__volume}')
             self.channelImage.setVisible(True)
+            self.channelImage.setVisible(True)
+            self.volumeBar.setVisible(True)
         else:
             self.__status = False
-            self.channelNumber.setVisible(False)
-            self.volumeNumber.setVisible(False)
             self.muteLabel.setVisible(False)
             self.channelImage.setVisible(False)
 
@@ -59,15 +55,17 @@ class Television (QMainWindow, Ui_TvRemote):
             if not self.__mute:
                 self.__mute = True
                 self.muteLabel.setVisible(True)
+                self.volumeBar.setVisible(False)
             else:
                 self.__mute = False
                 self.muteLabel.setVisible(False)
+                self.volumeBar.setVisible(True)
 
             return self.__mute
 
     def channel_up(self) -> None:
         """
-        This program checks if the TV is on, if so it will increase the channel by one. If at max it will go to first.
+        This program checks if the TV is on, if so it will increase the channel by one and display it. If at max it will go to first.
         :return: None
         """
 
@@ -84,11 +82,9 @@ class Television (QMainWindow, Ui_TvRemote):
                 self.__channel = Television.MIN_CHANNEL
                 self.displayImage(self.channelImage, "BBC.png")
 
-            self.channelNumber.setText(f'{self.__channel}')
-
     def channel_down(self) -> None:
         """
-        This program checks if the TV is on, if so it will decrease the channel by one. If at min it will go to highest.
+        This program checks if the TV is on, if so it will decrease the channel by one and display the channel. If at min it will go to highest.
         :return: None
         """
 
@@ -105,8 +101,6 @@ class Television (QMainWindow, Ui_TvRemote):
                 self.__channel = Television.MAX_CHANNEL
                 self.displayImage(self.channelImage, "MBC3.png")
 
-            self.channelNumber.setText(f'{self.__channel}')
-
     def volume_up(self) -> None:
         """
         This program checks if the TV is on, if so it will increase the volume by one. If at max it will go to stay.
@@ -117,11 +111,11 @@ class Television (QMainWindow, Ui_TvRemote):
             if self.__volume < Television.MAX_VOLUME:
                 self.__mute = False
                 self.__volume += 1
+                self.volumeBar.setValue(self.__volume)
             else:
                 self.__mute = False
                 self.__volume = Television.MAX_VOLUME
-
-            self.volumeNumber.setText(f'{self.__volume}')
+                self.volumeBar.setValue(self.__volume)
             self.muteLabel.setVisible(self.__mute)
 
     def volume_down(self) -> None:
@@ -134,11 +128,11 @@ class Television (QMainWindow, Ui_TvRemote):
             if self.__volume > Television.MIN_VOLUME:
                 self.__mute = False
                 self.__volume -= 1
+                self.volumeBar.setValue(self.__volume)
             else:
                 self.__mute = False
                 self.__volume = Television.MIN_VOLUME
-
-            self.volumeNumber.setText(f'{self.__volume}')
+                self.volumeBar.setValue(self.__volume)
             self.muteLabel.setVisible(self.__mute)
 
     def __str__(self) -> str:
@@ -151,8 +145,3 @@ class Television (QMainWindow, Ui_TvRemote):
             return f'Power = {self.__status}, Channel = {self.__channel}, Volume = {Television.MIN_VOLUME}'
         else:
             return f'Power = {self.__status}, Channel = {self.__channel}, Volume = {self.__volume}'
-
-
-
-
-
