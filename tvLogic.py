@@ -41,6 +41,7 @@ class Television(QMainWindow, Ui_TvRemote):
             self.__status = False
             self.muteLabel.setVisible(False)
             self.channelImage.setVisible(False)
+            self.volumeBar.setVisible(False)
 
         return self.__status
 
@@ -60,6 +61,7 @@ class Television(QMainWindow, Ui_TvRemote):
                 self.__mute = False
                 self.muteLabel.setVisible(False)
                 self.volumeBar.setVisible(True)
+                self.volumeBar.setVisible(False)
 
             return self.__mute
 
@@ -117,6 +119,7 @@ class Television(QMainWindow, Ui_TvRemote):
                 self.__volume = Television.MAX_VOLUME
                 self.volumeBar.setValue(self.__volume)
             self.muteLabel.setVisible(self.__mute)
+            self.volumeBar.setVisible(True)
 
     def volume_down(self) -> None:
         """
@@ -134,6 +137,7 @@ class Television(QMainWindow, Ui_TvRemote):
                 self.__volume = Television.MIN_VOLUME
                 self.volumeBar.setValue(self.__volume)
             self.muteLabel.setVisible(self.__mute)
+            self.volumeBar.setVisible(True)
 
     def __str__(self) -> str:
         """
