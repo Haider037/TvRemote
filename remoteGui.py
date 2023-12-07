@@ -61,6 +61,7 @@ class Ui_TvRemote(object):
         self.volumeBar.setMaximum(2)
         self.volumeBar.setProperty("value", 0)
         self.volumeBar.setObjectName("volumeBar")
+        self.volumeBar.setVisible(False)
         TvRemote.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=TvRemote)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 400, 24))
