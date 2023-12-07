@@ -7,65 +7,63 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6 import *
 from PyQt6.QtWidgets import *
-
 
 class Ui_TvRemote(object):
     def setupUi(self, TvRemote):
         TvRemote.setObjectName("TvRemote")
-        TvRemote.resize(800, 600)
-        TvRemote.setMinimumSize(QtCore.QSize(800, 599))
-        TvRemote.setMaximumSize(QtCore.QSize(800, 600))
+        TvRemote.resize(400, 600)
+        TvRemote.setMinimumSize(QtCore.QSize(400, 600))
+        TvRemote.setMaximumSize(QtCore.QSize(400, 600))
         self.centralwidget = QtWidgets.QWidget(parent=TvRemote)
         self.centralwidget.setObjectName("centralwidget")
         self.powerButton = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.powerButton.setGeometry(QtCore.QRect(360, 220, 71, 61))
+        self.powerButton.setGeometry(QtCore.QRect(150, 230, 71, 61))
         self.powerButton.setObjectName("powerButton")
         self.channelUp = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.channelUp.setGeometry(QtCore.QRect(280, 280, 41, 41))
+        self.channelUp.setGeometry(QtCore.QRect(70, 290, 41, 41))
         self.channelUp.setObjectName("channelUp")
         self.channelLabel = QtWidgets.QLabel(parent=self.centralwidget)
-        self.channelLabel.setGeometry(QtCore.QRect(277, 335, 60, 16))
+        self.channelLabel.setGeometry(QtCore.QRect(67, 345, 60, 16))
         self.channelLabel.setObjectName("channelLabel")
         self.channelDown = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.channelDown.setGeometry(QtCore.QRect(280, 370, 41, 41))
+        self.channelDown.setGeometry(QtCore.QRect(70, 380, 41, 41))
         self.channelDown.setObjectName("channelDown")
         self.volumeUp = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.volumeUp.setGeometry(QtCore.QRect(480, 280, 41, 41))
+        self.volumeUp.setGeometry(QtCore.QRect(270, 290, 41, 41))
         self.volumeUp.setObjectName("volumeUp")
         self.volumeDown = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.volumeDown.setGeometry(QtCore.QRect(480, 370, 41, 41))
+        self.volumeDown.setGeometry(QtCore.QRect(270, 380, 41, 41))
         self.volumeDown.setObjectName("volumeDown")
         self.volumeLabel = QtWidgets.QLabel(parent=self.centralwidget)
-        self.volumeLabel.setGeometry(QtCore.QRect(480, 335, 60, 16))
+        self.volumeLabel.setGeometry(QtCore.QRect(270, 345, 60, 16))
         self.volumeLabel.setObjectName("volumeLabel")
         self.muteButton = QtWidgets.QPushButton(parent=self.centralwidget)
-        self.muteButton.setGeometry(QtCore.QRect(360, 420, 71, 61))
+        self.muteButton.setGeometry(QtCore.QRect(150, 430, 71, 61))
         self.muteButton.setObjectName("muteButton")
         self.muteLabel = QtWidgets.QLabel(parent=self.centralwidget)
-        self.muteLabel.setGeometry(QtCore.QRect(380, 400, 31, 15))
+        self.muteLabel.setGeometry(QtCore.QRect(170, 410, 31, 15))
         self.muteLabel.setText("")
+        self.muteLabel.setPixmap(QtGui.QPixmap("../../redLine.png"))
+        self.muteLabel.setObjectName("muteLabel")
         self.displayImage(self.muteLabel, "redLine.png")
         self.muteLabel.setVisible(False)
-        self.muteLabel.setObjectName("muteLabel")
         self.channelImage = QtWidgets.QLabel(parent=self.centralwidget)
-        self.channelImage.setGeometry(QtCore.QRect(259, 10, 411, 170))
+        self.channelImage.setGeometry(QtCore.QRect(50, 20, 291, 170))
         self.channelImage.setText("")
         self.channelImage.setObjectName("channelImage")
         self.displayImage(self.channelImage, "BBC.png")
         self.channelImage.setVisible(False)
         self.volumeBar = QtWidgets.QProgressBar(parent=self.centralwidget)
-        self.volumeBar.setGeometry(QtCore.QRect(300, 490, 201, 23))
+        self.volumeBar.setGeometry(QtCore.QRect(90, 500, 201, 23))
         self.volumeBar.setMouseTracking(False)
         self.volumeBar.setTabletTracking(False)
         self.volumeBar.setMaximum(2)
         self.volumeBar.setProperty("value", 0)
         self.volumeBar.setObjectName("volumeBar")
-        self.volumeBar.setVisible(False)
         TvRemote.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=TvRemote)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 24))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 400, 24))
         self.menubar.setObjectName("menubar")
         TvRemote.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(parent=TvRemote)
@@ -87,15 +85,19 @@ class Ui_TvRemote(object):
         self.volumeLabel.setText(_translate("TvRemote", "Volume"))
         self.muteButton.setText(_translate("TvRemote", "Mute"))
 
-    def displayImage(self, label, path):
+    def displayImage(self, label, path) -> None:
+        """
+        Displays image using the pixmap libary in PyQt6
+        :param label: Where the image will be displayed
+        :param path:  Where the image is stored
+        :return: None
+        """
         pixmap = QtGui.QPixmap(path)
         pixmap = pixmap.scaled(200, 150, aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio)
         label.setPixmap(QtGui.QPixmap(pixmap))
 
-
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     TvRemote = QtWidgets.QMainWindow()
     ui = Ui_TvRemote()
