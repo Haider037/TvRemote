@@ -36,7 +36,7 @@ class Television(QMainWindow, Ui_TvRemote):
             self.muteLabel.setVisible(self.__mute)
             self.channelImage.setVisible(True)
             self.channelImage.setVisible(True)
-            self.volumeBar.setVisible(True)
+            self.volumeBar.setVisible(not self.__mute)
         else:
             self.__status = False
             self.muteLabel.setVisible(False)
@@ -61,7 +61,6 @@ class Television(QMainWindow, Ui_TvRemote):
                 self.__mute = False
                 self.muteLabel.setVisible(False)
                 self.volumeBar.setVisible(True)
-                self.volumeBar.setVisible(False)
 
             return self.__mute
 
